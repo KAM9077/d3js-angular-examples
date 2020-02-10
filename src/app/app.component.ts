@@ -37,6 +37,10 @@ export class AppComponent {
             title: 'Donut chart',
             route: '/donut-chart'
         },
+        {
+            title: 'Chart Test',
+            route: '/test'
+        },
     ];
 
 }

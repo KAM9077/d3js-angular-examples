@@ -13,6 +13,7 @@ import { StackedBarChartComponent } from './04_stacked_bar_chart/stacked-bar-cha
 import { BrushZoomComponent } from './05_brush_zoom/brush-zoom.component';
 import { PieChartComponent } from './06_pie_chart/pie-chart.component';
 import { DonutChartComponent } from './07_donut_chart/donut-chart.component';
+import { ChartTestComponent } from './chart-test/chart-test.component';
 
 const appRoutes: Routes = [
     { path: 'line-chart', component: LineChartComponent },
@@ -22,6 +23,7 @@ const appRoutes: Routes = [
     { path: 'brush-zoom', component: BrushZoomComponent },
     { path: 'pie-chart', component: PieChartComponent },
     { path: 'donut-chart', component: DonutChartComponent },
+    { path: 'test', component: ChartTestComponent },
     { path: '',
         redirectTo: '/line-chart',
         pathMatch: 'full'
@@ -39,6 +41,7 @@ const appRoutes: Routes = [
         BrushZoomComponent,
         PieChartComponent,
         DonutChartComponent,
+        ChartTestComponent,
     ],
     imports: [
         BrowserModule,
