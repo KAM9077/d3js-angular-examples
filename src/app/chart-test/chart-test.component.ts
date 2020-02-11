@@ -12,7 +12,7 @@ import * as d3TimeFormat from 'd3-time-format';
 
 import { SP500 } from '../shared';
 
-export interface Margin {
+interface Margin {
     top: number;
     right: number;
     bottom: number;
@@ -29,6 +29,7 @@ interface Stock {
   templateUrl: './chart-test.component.html',
   styleUrls: ['./chart-test.component.css']
 })
+
 export class ChartTestComponent implements OnInit {
 
     title = 'Brush & Zoom';
@@ -54,6 +55,7 @@ export class ChartTestComponent implements OnInit {
 
     private xScale:any;
     private yScale:any;
+    private y2Scale:any;
     private color:any;
 
     private context: any;
@@ -62,6 +64,7 @@ export class ChartTestComponent implements OnInit {
     private area: any;
     private area2: any;
     private line: any;
+    private line2: any;
     private lines: any;
     private focus: any;
 
@@ -477,6 +480,10 @@ export class ChartTestComponent implements OnInit {
         this.xAxis2 = d3Axis.axisBottom(this.x2);
         this.yAxis = d3Axis.axisLeft(this.y);
 
+        this.xScale = D3.scaleTime()
+        .domain(D3.extent([2000,2001,2002], d => d))
+        .range([0, (this.width - this.margin.right)]);
+
         this.brush = d3Brush.brushX()
             .extent([[0, 0], [this.width, this.height2]])
             .on('brush end', this.brushed.bind(this));
@@ -490,6 +497,10 @@ export class ChartTestComponent implements OnInit {
         this.line = D3.line()
         .x(d => this.x(d.date))
         .y(d => this.y(d.price));            
+
+        this.line2 = D3.line()
+        .x(d => this.x(d.date))
+        .y(d => this.y2(d.price));            
 
         this.area = d3Shape.area()
             .curve(d3Shape.curveMonotoneX)
@@ -526,11 +537,11 @@ export class ChartTestComponent implements OnInit {
         let s = d3.event.selection || this.x2.range();
         this.x.domain(s.map(this.x2.invert, this.x2));
         this.xScale.domain(s.map(this.x2.invert, this.x2));
-        this.focus.select('.area').attr('d', this.area);
-        console.log(this.focus.select('.area'))
+        this.focus.select('.area2').attr('d', this.area);
+        console.log(this.focus.select('.area2'))
         this.focus.selectAll('.line').attr('d', d => this.line(d.values));
         this.focus.select('.axis--x').call(this.xAxis);
-        this.svg.select('.zoom').call(this.zoom.transform, d3Zoom.zoomIdentity
+        this.svg.select('.zoom2').call(this.zoom.transform, d3Zoom.zoomIdentity
             .scale(this.width / (s[1] - s[0]))
             .translate(-s[0], 0));
     }
@@ -541,7 +552,7 @@ export class ChartTestComponent implements OnInit {
         this.x.domain(t.rescaleX(this.x2).domain());
         // this.x.domain(t.rescaleX(this.x2).domain());
         this.xScale.domain(t.rescaleX(this.x2).domain());
-        this.focus.select('.area').attr('d', this.area);
+        this.focus.select('.area2').attr('d', this.area);
         // console.log(this.focus.select('.area'))
         this.focus.selectAll('.line').attr('d', d => this.line(d.values));
         console.log(this.lines.selectAll('.line'))
@@ -562,14 +573,14 @@ export class ChartTestComponent implements OnInit {
                 data3.push(d);
             });
         });
-
-        this.xScale = D3.scaleTime()
-        .domain(D3.extent([2000,2001,2002], d => d))
-        .range([0, (this.width - this.margin.right)]);
       
-      this.yScale = D3.scaleLinear()
-        .domain([0, D3.max(this.data[2].values, d => d.price)])
-        .range([(this.height - this.margin.top), 0]);
+      // this.yScale = D3.scaleLinear()
+      //   .domain([0, D3.max(this.data[2].values, d => d.price)])
+      //   .range([(this.height - this.margin.top), 0]);
+      
+      // this.y2Scale = D3.scaleLinear()
+      //   .domain([0, D3.max(this.data[2].values, d => d.price)])
+      //   .range([(this.height2 - this.margin.top), 0]);
       
       this.color = D3.scaleOrdinal(D3.schemeCategory10);
 
@@ -613,10 +624,29 @@ export class ChartTestComponent implements OnInit {
             .attr('class', 'axis axis--y')
             .call(this.yAxis);
 
-        this.context.append('path')
-            .datum(data)
-            .attr('class', 'area')
-            .attr('d', this.area2);
+        // this.context.append('path')
+        //     .datum(data)
+        //     .attr('class', 'area2')
+        //     .attr('d', this.area2);
+
+        this.context.selectAll('.line')
+        .data(this.data).enter()
+        // .append('g')
+        // .attr('class', 'line-group')  
+        // .on("mouseover", (d, i) => {
+        //   this.svg.append("text")
+        //       .attr("class", "title-text")
+        //       .style("fill", this.color(i))        
+        //       .text(d.name)
+        //       .attr("text-anchor", "middle")
+        //       .attr("x", (this.width - this.margin.top)/2)
+        //       .attr("y", 5);
+        //   })
+        .append('path')
+        .attr('class', 'line')  
+        .attr('d', d => this.line2(d.values))
+        .style("fill", 'none')
+        .style('stroke', (d, i) => this.color(i+1))
 
         this.context.append('g')
             .attr('class', 'axis axis--x')
@@ -629,7 +659,8 @@ export class ChartTestComponent implements OnInit {
             .call(this.brush.move, this.x.range());
 
         this.svg.append('rect')
-            .attr('class', 'zoom')
+            .attr('class', 'zoom2')
+            .style('opacity', 0)
             .attr('width', this.width)
             .attr('height', this.height)
             .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')')

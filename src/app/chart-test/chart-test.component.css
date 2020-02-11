@@ -1,10 +1,11 @@
-.area {
+.area2 {
   fill: steelblue;
   clip-path: url(#clip);
 }
 
-.zoom {
+.zoom2 {
   cursor: move;
   fill: none;
+  opacity: 0;
   pointer-events: all;
 }
