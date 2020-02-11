@@ -1,19 +1,10 @@
-svg {
-    font-family: Sans-Serif, Arial;
+.area {
+  fill: steelblue;
+  clip-path: url(#clip);
 }
-.line {
-  stroke-width: 2;
+
+.zoom {
+  cursor: move;
   fill: none;
-}
-
-.axis path {
-  stroke: black;
-}
-
-.text {
-  font-size: 12px;
-}
-
-.title-text {
-  font-size: 12px;
+  pointer-events: all;
 }
