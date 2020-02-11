@@ -11,6 +11,7 @@ import * as d3Array from 'd3-array';
 import * as d3TimeFormat from 'd3-time-format';
 
 import { SP500 } from '../shared';
+import { Generator } from '../shared';
 
 interface Margin {
     top: number;
@@ -95,11 +96,14 @@ export class ChartTestComponent implements OnInit {
         {date: 'May 2002', price: 1067.14},
         {date: 'Jun 2002', price: 989.82}
     ]
+
+    private data3 = [];
+
     private data = [
         {
           name: "USA",
           values: [
-                 {date: 'Sep 2005', price: 1228.81},
+            {date: 'Sep 2005', price: 1228.81},
             {date: 'Oct 2005', price: 1207.01},
             {date: 'Nov 2005', price: 1249.48},
             {date: 'Dec 2005', price: 1248.29},
@@ -446,13 +450,22 @@ export class ChartTestComponent implements OnInit {
         // }
       ];
 
-    constructor() {
+    constructor(public generator : Generator) {
     }
 
     ngOnInit() {
+        this.mapDate();
+        // console.log(this.generator.mapJson(['01/01/2005','01/01/2010'],[100, 2000]));
         this.initMargins();
         this.initSvg();
         this.drawChart(this.parseData(SP500), this.parseData(this.data1));
+    }
+
+
+    private mapDate(){
+        this.data = []
+        let obj = this.generator.mapJson(['01/01/2005','01/01/2010'],[100, 2000]);
+        this.data = obj[33].child;
     }
 
     private initMargins() {
@@ -538,7 +551,7 @@ export class ChartTestComponent implements OnInit {
         this.x.domain(s.map(this.x2.invert, this.x2));
         this.xScale.domain(s.map(this.x2.invert, this.x2));
         this.focus.select('.area2').attr('d', this.area);
-        console.log(this.focus.select('.area2'))
+        // console.log(this.focus.select('.area2'))
         this.focus.selectAll('.line').attr('d', d => this.line(d.values));
         this.focus.select('.axis--x').call(this.xAxis);
         this.svg.select('.zoom2').call(this.zoom.transform, d3Zoom.zoomIdentity
@@ -555,13 +568,12 @@ export class ChartTestComponent implements OnInit {
         this.focus.select('.area2').attr('d', this.area);
         // console.log(this.focus.select('.area'))
         this.focus.selectAll('.line').attr('d', d => this.line(d.values));
-        console.log(this.lines.selectAll('.line'))
+        // console.log(this.lines.selectAll('.line'))
         this.focus.select('.axis--x').call(this.xAxis);
         this.context.select('.brush').call(this.brush.move, this.x.range().map(t.invertX, t));
     }
 
     private drawChart(data: Stock[], data1: Stock[]) {
-    console.log(data)
 
         // this.parseDate = D3.timeParse("%Y");
     let data3 = []
