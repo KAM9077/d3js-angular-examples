@@ -107,258 +107,207 @@ export class ChartTestComponent implements OnInit {
             {date: 'Oct 2005', price: 1207.01},
             {date: 'Nov 2005', price: 1249.48},
             {date: 'Dec 2005', price: 1248.29},
-            {date: 'Jan 2006', price: 1280.08},
-            {date: 'Feb 2006', price: 1280.66},
-            {date: 'Mar 2006', price: 1294.87},
-            {date: 'Apr 2006', price: 1310.61},
-            {date: 'May 2006', price: 1270.09},
-            {date: 'Jun 2006', price: 1270.2},
-            {date: 'Jul 2006', price: 1276.66},
-            {date: 'Aug 2006', price: 1303.82},
-            {date: 'Sep 2006', price: 1335.85},
-            {date: 'Oct 2006', price: 1377.94},
-            {date: 'Nov 2006', price: 1400.63},
-            {date: 'Dec 2006', price: 1418.3},
-            {date: 'Jan 2007', price: 1438.24},
-            {date: 'Feb 2007', price: 1406.82},
-            {date: 'Mar 2007', price: 1420.86},
-            {date: 'Apr 2007', price: 1482.37},
-            {date: 'May 2007', price: 1530.62},
-            {date: 'Jun 2007', price: 1503.35},
-            {date: 'Jul 2007', price: 1455.27},
-            {date: 'Aug 2007', price: 1473.99},
-            {date: 'Sep 2007', price: 1526.75},
-            {date: 'Oct 2007', price: 1549.38},
-            {date: 'Nov 2007', price: 1481.14},
-            {date: 'Dec 2007', price: 1468.36},
-            {date: 'Jan 2008', price: 1378.55},
-            {date: 'Feb 2008', price: 1330.63},
-            {date: 'Mar 2008', price: 1322.7},
-            {date: 'Apr 2008', price: 1385.59},
-            {date: 'May 2008', price: 1400.38},
-            {date: 'Jun 2008', price: 1280},
-            {date: 'Jul 2008', price: 1267.38},
-            {date: 'Aug 2008', price: 1282.83},
-            {date: 'Sep 2008', price: 1166.36},
-            {date: 'Oct 2008', price: 968.75},
-            {date: 'Nov 2008', price: 896.24},
-            {date: 'Dec 2008', price: 903.25},
-            {date: 'Jan 2009', price: 825.88},
-            {date: 'Feb 2009', price: 735.09},
-            {date: 'Mar 2009', price: 797.87},
-            {date: 'Apr 2009', price: 872.81},
-            {date: 'May 2009', price: 919.14},
-            {date: 'Jun 2009', price: 919.32},
-            {date: 'Jul 2009', price: 987.48},
-            {date: 'Aug 2009', price: 1020.62},
-            {date: 'Sep 2009', price: 1057.08},
-            {date: 'Oct 2009', price: 1036.19},
-            {date: 'Nov 2009', price: 1095.63},
-            {date: 'Dec 2009', price: 1115.1},
-            {date: 'Jan 2010', price: 1073.87},
-            {date: 'Feb 2010', price: 1104.49},
-            {date: 'Mar 2010', price: 1140.45}
           ]
         },
-        {
-          name: "Canada",
-          values: [
-            {date: 'Jan 2000', price: 1394.46},
-            {date: 'Feb 2000', price: 1366.42},
-            {date: 'Mar 2000', price: 1498.58},
-            {date: 'Apr 2000', price: 1452.43},
-            {date: 'May 2000', price: 1420.6},
-            {date: 'Jun 2000', price: 1454.6},
-            {date: 'Jul 2000', price: 1430.83},
-            {date: 'Aug 2000', price: 1517.68},
-            {date: 'Sep 2000', price: 1436.51},
-            {date: 'Oct 2000', price: 1429.4},
-            {date: 'Nov 2000', price: 1314.95},
-            {date: 'Dec 2000', price: 1220.28},
-            {date: 'Jan 2001', price: 1226.01},
-            {date: 'Feb 2001', price: 1229.94},
-            {date: 'Mar 2001', price: 1220.33},
-            {date: 'Apr 2001', price: 1229.46},
-            {date: 'May 2001', price: 1225.82},
-            {date: 'Jun 2001', price: 1224.38},
-            {date: 'Jul 2001', price: 1221.23},
-            {date: 'Aug 2001', price: 1223.58},
-            {date: 'Sep 2001', price: 1220.94},
-            {date: 'Oct 2001', price: 1229.78},
-            {date: 'Nov 2001', price: 1229.45},
-            {date: 'Dec 2001', price: 1228.08},
-            {date: 'Jan 2002', price: 1220.2},
-            {date: 'Feb 2002', price: 1226.73},
-            {date: 'Mar 2002', price: 1227.39},
-            {date: 'Apr 2002', price: 1226.92},
-            {date: 'May 2002', price: 1227.14},
-            {date: 'Jun 2002', price: 989.82},
-            {date: 'Jul 2002', price: 911.62},
-            {date: 'Aug 2002', price: 916.07},
-            {date: 'Sep 2002', price: 815.28},
-            {date: 'Oct 2002', price: 885.76},
-            {date: 'Nov 2002', price: 936.31},
-            {date: 'Dec 2002', price: 879.82},
-            {date: 'Jan 2003', price: 855.7},
-            {date: 'Feb 2003', price: 841.15},
-            {date: 'Mar 2003', price: 847.18},
-            {date: 'Apr 2003', price: 917.92},
-            {date: 'May 2003', price: 967.59},
-            {date: 'Jun 2003', price: 977.5},
-            {date: 'Jul 2003', price: 997.31},
-            {date: 'Aug 2003', price: 1078.01},
-            {date: 'Sep 2003', price: 997.97},
-            {date: 'Oct 2003', price: 1070.71},
-            {date: 'Nov 2003', price: 1078.2},
-            {date: 'Dec 2003', price: 1171.92},
-            {date: 'Jan 2004', price: 1171.13},
-            {date: 'Feb 2004', price: 1174.94},
-            {date: 'Mar 2004', price: 1176.21},
-            {date: 'Apr 2004', price: 1177.3},
-            {date: 'May 2004', price: 1170.68},
-            {date: 'Jun 2004', price: 1140.84},
-            {date: 'Jul 2004', price: 1101.72},
-            {date: 'Aug 2004', price: 1304.24},
-            {date: 'Sep 2004', price: 1314.58},
-            {date: 'Oct 2004', price: 1330.2},
-            {date: 'Nov 2004', price: 1373.82},
-            {date: 'Dec 2004', price: 1311.92},
-            {date: 'Jan 2005', price: 1381.27},
-            {date: 'Feb 2005', price: 1303.6},
-            {date: 'Mar 2005', price: 1380.59},
-            {date: 'Apr 2005', price: 1356.85},
-            {date: 'May 2005', price: 1391.5},
-            {date: 'Jun 2005', price: 1391.33},
-          ]
-        },
-        {
-          name: "Maxico",
-          values: [
-            {date: 'Jan 2000', price: 1394.46},
-            {date: 'Feb 2000', price: 1666.42},
-            {date: 'Mar 2000', price: 1698.58},
-            {date: 'Apr 2000', price: 1652.43},
-            {date: 'May 2000', price: 1620.6},
-            {date: 'Jun 2000', price: 1654.6},
-            {date: 'Jul 2000', price: 1630.83},
-            {date: 'Aug 2000', price: 1617.68},
-            {date: 'Sep 2000', price: 1636.51},
-            {date: 'Oct 2000', price: 1629.4},
-            {date: 'Nov 2000', price: 1614.95},
-            {date: 'Dec 2000', price: 1620.28},
-            {date: 'Jan 2001', price: 1366.01},
-            {date: 'Feb 2001', price: 1239.94},
-            {date: 'Mar 2001', price: 1160.33},
-            {date: 'Apr 2001', price: 1249.46},
-            {date: 'May 2001', price: 1255.82},
-            {date: 'Jun 2001', price: 1224.38},
-            {date: 'Jul 2001', price: 1311.23},
-            {date: 'Aug 2001', price: 1333.58},
-            {date: 'Sep 2001', price: 1340.94},
-            {date: 'Oct 2001', price: 1359.78},
-            {date: 'Nov 2001', price: 1339.45},
-            {date: 'Dec 2001', price: 1348.08},
-            {date: 'Jan 2002', price: 1330.2},
-            {date: 'Feb 2002', price: 1306.73},
-            {date: 'Mar 2002', price: 1347.39},
-            {date: 'Apr 2002', price: 1376.92},
-            {date: 'May 2002', price: 1367.14},
-            {date: 'Jun 2002', price: 939.82},
-            {date: 'Jul 2002', price: 931.62},
-            {date: 'Aug 2002', price: 936.07},
-            {date: 'Sep 2002', price: 835.28},
-            {date: 'Oct 2002', price: 835.76},
-            {date: 'Nov 2002', price: 936.31},
-            {date: 'Dec 2002', price: 879.82},
-            {date: 'Jan 2003', price: 855.7},
-            {date: 'Feb 2003', price: 841.15},
-            {date: 'Mar 2003', price: 848.18},
-            {date: 'Apr 2003', price: 916.92},
-            {date: 'May 2003', price: 963.59},
-            {date: 'Jun 2003', price: 974.5},
-            {date: 'Jul 2003', price: 990.31},
-            {date: 'Aug 2003', price: 1008.01},
-            {date: 'Sep 2003', price: 995.97},
-            {date: 'Oct 2003', price: 1050.71},
-            {date: 'Nov 2003', price: 1058.2},
-            {date: 'Dec 2003', price: 1111.92},
-            {date: 'Jan 2004', price: 1131.13},
-            {date: 'Feb 2004', price: 1144.94},
-            {date: 'Mar 2004', price: 1126.21},
-            {date: 'Apr 2004', price: 1107.3},
-            {date: 'May 2004', price: 1120.68},
-            {date: 'Jun 2004', price: 1140.84},
-            {date: 'Jul 2004', price: 1101.72},
-            {date: 'Aug 2004', price: 1104.24},
-            {date: 'Sep 2004', price: 1114.58},
-            {date: 'Oct 2004', price: 1130.2},
-            {date: 'Nov 2004', price: 1173.82},
-            {date: 'Dec 2004', price: 1211.92},
-            {date: 'Jan 2005', price: 1181.27},
-            {date: 'Feb 2005', price: 1203.6},
-            {date: 'Mar 2005', price: 1180.59},
-            {date: 'Apr 2005', price: 1156.85},
-            {date: 'May 2005', price: 1191.5},
-            {date: 'Jun 2005', price: 1191.33},
-            {date: 'Jul 2005', price: 1234.18},
-            {date: 'Aug 2005', price: 1220.33},
-            {date: 'Sep 2005', price: 1228.81},
-            {date: 'Oct 2005', price: 1207.01},
-            {date: 'Nov 2005', price: 1249.48},
-            {date: 'Dec 2005', price: 1248.29},
-            {date: 'Jan 2006', price: 1380.08},
-            {date: 'Feb 2006', price: 1380.66},
-            {date: 'Mar 2006', price: 1394.87},
-            {date: 'Apr 2006', price: 1310.61},
-            {date: 'May 2006', price: 1370.09},
-            {date: 'Jun 2006', price: 1370.2},
-            {date: 'Jul 2006', price: 1376.66},
-            {date: 'Aug 2006', price: 1303.82},
-            {date: 'Sep 2006', price: 1335.85},
-            {date: 'Oct 2006', price: 1377.94},
-            {date: 'Nov 2006', price: 1400.63},
-            {date: 'Dec 2006', price: 1418.3},
-            {date: 'Jan 2007', price: 1438.24},
-            {date: 'Feb 2007', price: 1406.82},
-            {date: 'Mar 2007', price: 1120.86},
-            {date: 'Apr 2007', price: 1182.37},
-            {date: 'May 2007', price: 1130.62},
-            {date: 'Jun 2007', price: 1103.35},
-            {date: 'Jul 2007', price: 1155.27},
-            {date: 'Aug 2007', price: 1173.99},
-            {date: 'Sep 2007', price: 1126.75},
-            {date: 'Oct 2007', price: 1149.38},
-            {date: 'Nov 2007', price: 1181.14},
-            {date: 'Dec 2007', price: 1468.36},
-            {date: 'Jan 2008', price: 1378.55},
-            {date: 'Feb 2008', price: 1330.63},
-            {date: 'Mar 2008', price: 1322.7},
-            {date: 'Apr 2008', price: 1385.59},
-            {date: 'May 2008', price: 1400.38},
-            {date: 'Jun 2008', price: 1280},
-            {date: 'Jul 2008', price: 1267.38},
-            {date: 'Aug 2008', price: 1282.83},
-            {date: 'Sep 2008', price: 1266.36},
-            {date: 'Oct 2008', price: 928.75},
-            {date: 'Nov 2008', price: 826.24},
-            {date: 'Dec 2008', price: 923.25},
-            {date: 'Jan 2009', price: 825.88},
-            {date: 'Feb 2009', price: 725.09},
-            {date: 'Mar 2009', price: 727.87},
-            {date: 'Apr 2009', price: 822.81},
-            {date: 'May 2009', price: 929.14},
-            {date: 'Jun 2009', price: 929.32},
-            {date: 'Jul 2009', price: 987.48},
-            {date: 'Aug 2009', price: 1020.62},
-            {date: 'Sep 2009', price: 1757.08},
-            {date: 'Oct 2009', price: 1736.19},
-            {date: 'Nov 2009', price: 1795.63},
-            {date: 'Dec 2009', price: 1715.1},
-            {date: 'Jan 2010', price: 1773.87},
-            {date: 'Feb 2010', price: 1704.49},
-            {date: 'Mar 2010', price: 1740.45}
-          ]
-        },
+        // {
+        //   name: "Canada",
+        //   values: [
+        //     {date: 'Jan 2000', price: 1394.46},
+        //     {date: 'Feb 2000', price: 1366.42},
+        //     {date: 'Mar 2000', price: 1498.58},
+        //     {date: 'Apr 2000', price: 1452.43},
+        //     {date: 'May 2000', price: 1420.6},
+        //     {date: 'Jun 2000', price: 1454.6},
+        //     {date: 'Jul 2000', price: 1430.83},
+        //     {date: 'Aug 2000', price: 1517.68},
+        //     {date: 'Sep 2000', price: 1436.51},
+        //     {date: 'Oct 2000', price: 1429.4},
+        //     {date: 'Nov 2000', price: 1314.95},
+        //     {date: 'Dec 2000', price: 1220.28},
+        //     {date: 'Jan 2001', price: 1226.01},
+        //     {date: 'Feb 2001', price: 1229.94},
+        //     {date: 'Mar 2001', price: 1220.33},
+        //     {date: 'Apr 2001', price: 1229.46},
+        //     {date: 'May 2001', price: 1225.82},
+        //     {date: 'Jun 2001', price: 1224.38},
+        //     {date: 'Jul 2001', price: 1221.23},
+        //     {date: 'Aug 2001', price: 1223.58},
+        //     {date: 'Sep 2001', price: 1220.94},
+        //     {date: 'Oct 2001', price: 1229.78},
+        //     {date: 'Nov 2001', price: 1229.45},
+        //     {date: 'Dec 2001', price: 1228.08},
+        //     {date: 'Jan 2002', price: 1220.2},
+        //     {date: 'Feb 2002', price: 1226.73},
+        //     {date: 'Mar 2002', price: 1227.39},
+        //     {date: 'Apr 2002', price: 1226.92},
+        //     {date: 'May 2002', price: 1227.14},
+        //     {date: 'Jun 2002', price: 989.82},
+        //     {date: 'Jul 2002', price: 911.62},
+        //     {date: 'Aug 2002', price: 916.07},
+        //     {date: 'Sep 2002', price: 815.28},
+        //     {date: 'Oct 2002', price: 885.76},
+        //     {date: 'Nov 2002', price: 936.31},
+        //     {date: 'Dec 2002', price: 879.82},
+        //     {date: 'Jan 2003', price: 855.7},
+        //     {date: 'Feb 2003', price: 841.15},
+        //     {date: 'Mar 2003', price: 847.18},
+        //     {date: 'Apr 2003', price: 917.92},
+        //     {date: 'May 2003', price: 967.59},
+        //     {date: 'Jun 2003', price: 977.5},
+        //     {date: 'Jul 2003', price: 997.31},
+        //     {date: 'Aug 2003', price: 1078.01},
+        //     {date: 'Sep 2003', price: 997.97},
+        //     {date: 'Oct 2003', price: 1070.71},
+        //     {date: 'Nov 2003', price: 1078.2},
+        //     {date: 'Dec 2003', price: 1171.92},
+        //     {date: 'Jan 2004', price: 1171.13},
+        //     {date: 'Feb 2004', price: 1174.94},
+        //     {date: 'Mar 2004', price: 1176.21},
+        //     {date: 'Apr 2004', price: 1177.3},
+        //     {date: 'May 2004', price: 1170.68},
+        //     {date: 'Jun 2004', price: 1140.84},
+        //     {date: 'Jul 2004', price: 1101.72},
+        //     {date: 'Aug 2004', price: 1304.24},
+        //     {date: 'Sep 2004', price: 1314.58},
+        //     {date: 'Oct 2004', price: 1330.2},
+        //     {date: 'Nov 2004', price: 1373.82},
+        //     {date: 'Dec 2004', price: 1311.92},
+        //     {date: 'Jan 2005', price: 1381.27},
+        //     {date: 'Feb 2005', price: 1303.6},
+        //     {date: 'Mar 2005', price: 1380.59},
+        //     {date: 'Apr 2005', price: 1356.85},
+        //     {date: 'May 2005', price: 1391.5},
+        //     {date: 'Jun 2005', price: 1391.33},
+        //   ]
+        // },
+        // {
+        //   name: "Maxico",
+        //   values: [
+        //     {date: 'Jan 2000', price: 1394.46},
+        //     {date: 'Feb 2000', price: 1666.42},
+        //     {date: 'Mar 2000', price: 1698.58},
+        //     {date: 'Apr 2000', price: 1652.43},
+        //     {date: 'May 2000', price: 1620.6},
+        //     {date: 'Jun 2000', price: 1654.6},
+        //     {date: 'Jul 2000', price: 1630.83},
+        //     {date: 'Aug 2000', price: 1617.68},
+        //     {date: 'Sep 2000', price: 1636.51},
+        //     {date: 'Oct 2000', price: 1629.4},
+        //     {date: 'Nov 2000', price: 1614.95},
+        //     {date: 'Dec 2000', price: 1620.28},
+        //     {date: 'Jan 2001', price: 1366.01},
+        //     {date: 'Feb 2001', price: 1239.94},
+        //     {date: 'Mar 2001', price: 1160.33},
+        //     {date: 'Apr 2001', price: 1249.46},
+        //     {date: 'May 2001', price: 1255.82},
+        //     {date: 'Jun 2001', price: 1224.38},
+        //     {date: 'Jul 2001', price: 1311.23},
+        //     {date: 'Aug 2001', price: 1333.58},
+        //     {date: 'Sep 2001', price: 1340.94},
+        //     {date: 'Oct 2001', price: 1359.78},
+        //     {date: 'Nov 2001', price: 1339.45},
+        //     {date: 'Dec 2001', price: 1348.08},
+        //     {date: 'Jan 2002', price: 1330.2},
+        //     {date: 'Feb 2002', price: 1306.73},
+        //     {date: 'Mar 2002', price: 1347.39},
+        //     {date: 'Apr 2002', price: 1376.92},
+        //     {date: 'May 2002', price: 1367.14},
+        //     {date: 'Jun 2002', price: 939.82},
+        //     {date: 'Jul 2002', price: 931.62},
+        //     {date: 'Aug 2002', price: 936.07},
+        //     {date: 'Sep 2002', price: 835.28},
+        //     {date: 'Oct 2002', price: 835.76},
+        //     {date: 'Nov 2002', price: 936.31},
+        //     {date: 'Dec 2002', price: 879.82},
+        //     {date: 'Jan 2003', price: 855.7},
+        //     {date: 'Feb 2003', price: 841.15},
+        //     {date: 'Mar 2003', price: 848.18},
+        //     {date: 'Apr 2003', price: 916.92},
+        //     {date: 'May 2003', price: 963.59},
+        //     {date: 'Jun 2003', price: 974.5},
+        //     {date: 'Jul 2003', price: 990.31},
+        //     {date: 'Aug 2003', price: 1008.01},
+        //     {date: 'Sep 2003', price: 995.97},
+        //     {date: 'Oct 2003', price: 1050.71},
+        //     {date: 'Nov 2003', price: 1058.2},
+        //     {date: 'Dec 2003', price: 1111.92},
+        //     {date: 'Jan 2004', price: 1131.13},
+        //     {date: 'Feb 2004', price: 1144.94},
+        //     {date: 'Mar 2004', price: 1126.21},
+        //     {date: 'Apr 2004', price: 1107.3},
+        //     {date: 'May 2004', price: 1120.68},
+        //     {date: 'Jun 2004', price: 1140.84},
+        //     {date: 'Jul 2004', price: 1101.72},
+        //     {date: 'Aug 2004', price: 1104.24},
+        //     {date: 'Sep 2004', price: 1114.58},
+        //     {date: 'Oct 2004', price: 1130.2},
+        //     {date: 'Nov 2004', price: 1173.82},
+        //     {date: 'Dec 2004', price: 1211.92},
+        //     {date: 'Jan 2005', price: 1181.27},
+        //     {date: 'Feb 2005', price: 1203.6},
+        //     {date: 'Mar 2005', price: 1180.59},
+        //     {date: 'Apr 2005', price: 1156.85},
+        //     {date: 'May 2005', price: 1191.5},
+        //     {date: 'Jun 2005', price: 1191.33},
+        //     {date: 'Jul 2005', price: 1234.18},
+        //     {date: 'Aug 2005', price: 1220.33},
+        //     {date: 'Sep 2005', price: 1228.81},
+        //     {date: 'Oct 2005', price: 1207.01},
+        //     {date: 'Nov 2005', price: 1249.48},
+        //     {date: 'Dec 2005', price: 1248.29},
+        //     {date: 'Jan 2006', price: 1380.08},
+        //     {date: 'Feb 2006', price: 1380.66},
+        //     {date: 'Mar 2006', price: 1394.87},
+        //     {date: 'Apr 2006', price: 1310.61},
+        //     {date: 'May 2006', price: 1370.09},
+        //     {date: 'Jun 2006', price: 1370.2},
+        //     {date: 'Jul 2006', price: 1376.66},
+        //     {date: 'Aug 2006', price: 1303.82},
+        //     {date: 'Sep 2006', price: 1335.85},
+        //     {date: 'Oct 2006', price: 1377.94},
+        //     {date: 'Nov 2006', price: 1400.63},
+        //     {date: 'Dec 2006', price: 1418.3},
+        //     {date: 'Jan 2007', price: 1438.24},
+        //     {date: 'Feb 2007', price: 1406.82},
+        //     {date: 'Mar 2007', price: 1120.86},
+        //     {date: 'Apr 2007', price: 1182.37},
+        //     {date: 'May 2007', price: 1130.62},
+        //     {date: 'Jun 2007', price: 1103.35},
+        //     {date: 'Jul 2007', price: 1155.27},
+        //     {date: 'Aug 2007', price: 1173.99},
+        //     {date: 'Sep 2007', price: 1126.75},
+        //     {date: 'Oct 2007', price: 1149.38},
+        //     {date: 'Nov 2007', price: 1181.14},
+        //     {date: 'Dec 2007', price: 1468.36},
+        //     {date: 'Jan 2008', price: 1378.55},
+        //     {date: 'Feb 2008', price: 1330.63},
+        //     {date: 'Mar 2008', price: 1322.7},
+        //     {date: 'Apr 2008', price: 1385.59},
+        //     {date: 'May 2008', price: 1400.38},
+        //     {date: 'Jun 2008', price: 1280},
+        //     {date: 'Jul 2008', price: 1267.38},
+        //     {date: 'Aug 2008', price: 1282.83},
+        //     {date: 'Sep 2008', price: 1266.36},
+        //     {date: 'Oct 2008', price: 928.75},
+        //     {date: 'Nov 2008', price: 826.24},
+        //     {date: 'Dec 2008', price: 923.25},
+        //     {date: 'Jan 2009', price: 825.88},
+        //     {date: 'Feb 2009', price: 725.09},
+        //     {date: 'Mar 2009', price: 727.87},
+        //     {date: 'Apr 2009', price: 822.81},
+        //     {date: 'May 2009', price: 929.14},
+        //     {date: 'Jun 2009', price: 929.32},
+        //     {date: 'Jul 2009', price: 987.48},
+        //     {date: 'Aug 2009', price: 1020.62},
+        //     {date: 'Sep 2009', price: 1757.08},
+        //     {date: 'Oct 2009', price: 1736.19},
+        //     {date: 'Nov 2009', price: 1795.63},
+        //     {date: 'Dec 2009', price: 1715.1},
+        //     {date: 'Jan 2010', price: 1773.87},
+        //     {date: 'Feb 2010', price: 1704.49},
+        //     {date: 'Mar 2010', price: 1740.45}
+        //   ]
+        // },
         // {
         //   name: "Canada",
         //   values: [
@@ -458,14 +407,15 @@ export class ChartTestComponent implements OnInit {
         // console.log(this.generator.mapJson(['01/01/2005','01/01/2010'],[100, 2000]));
         this.initMargins();
         this.initSvg();
-        this.drawChart(this.parseData(SP500), this.parseData(this.data1));
+        this.drawChart(this.data);
     }
-
 
     private mapDate(){
         this.data = []
         let obj = this.generator.mapJson(['01/01/2005','01/01/2010'],[100, 2000]);
-        this.data = obj[33].child;
+        this.data = obj[49].child;
+        console.log(obj[49].child)
+
     }
 
     private initMargins() {
@@ -484,14 +434,19 @@ export class ChartTestComponent implements OnInit {
         this.height = +this.svg.attr('height') - this.margin.top - this.margin.bottom;
         this.height2 = +this.svg.attr('height') - this.margin2.top - this.margin2.bottom;
 
-        this.x = d3Scale.scaleTime().range([0, this.width]);
-        this.x2 = d3Scale.scaleTime().range([0, this.width]);
-        this.y = d3Scale.scaleLinear().range([this.height, 0]);
-        this.y2 = d3Scale.scaleLinear().range([this.height2, 0]);
+        // this.svg.attr('width', 1500);
 
-        this.xAxis = d3Axis.axisBottom(this.x);
+        this.x = d3Scale.scaleTime().range([0, this.width]);  // set the scale dimention that will be appeared depends on the start and the end ( [0, this.width] )
+        this.x2 = d3Scale.scaleTime().range([0, this.width]); // set the scale dimention that will be appeared depends on the start and the end ( [0, this.width] ) its for brush
+        this.y = d3Scale.scaleLinear().range([this.height, 0]); // set the scale dimention that will be appeared depends on the start and the end ( [0, this.height] )
+        this.y2 = d3Scale.scaleLinear().range([this.height2, 0]); // set the scale dimention that will be appeared depends on the start and the end ( [0, this.height2] ) its for brush
+
+        this.xAxis = d3Axis.axisBottom(this.x); 
         this.xAxis2 = d3Axis.axisBottom(this.x2);
         this.yAxis = d3Axis.axisLeft(this.y);
+
+console.log(this.height)
+// console.log(this.x2)
 
         this.xScale = D3.scaleTime()
         .domain(D3.extent([2000,2001,2002], d => d))
@@ -549,11 +504,16 @@ export class ChartTestComponent implements OnInit {
         if (d3.event.sourceEvent && d3.event.sourceEvent.type === 'zoom') return; // ignore brush-by-zoom
         let s = d3.event.selection || this.x2.range();
         this.x.domain(s.map(this.x2.invert, this.x2));
+        this.focus.selectAll("rect")
+              .attr("x", (d) => this.x(d.date)  )
+            //   .attr("y", (d) => this.height - this.y(d.price))
+              .attr('width', 1)
+
         this.xScale.domain(s.map(this.x2.invert, this.x2));
         this.focus.select('.area2').attr('d', this.area);
         // console.log(this.focus.select('.area2'))
         this.focus.selectAll('.line').attr('d', d => this.line(d.values));
-        this.focus.select('.axis--x').call(this.xAxis);
+        this.focus.select('.axis--x').call(this.xAxis); // drow the axis
         this.svg.select('.zoom2').call(this.zoom.transform, d3Zoom.zoomIdentity
             .scale(this.width / (s[1] - s[0]))
             .translate(-s[0], 0));
@@ -562,45 +522,45 @@ export class ChartTestComponent implements OnInit {
     private zoomed() {
         if (d3.event.sourceEvent && d3.event.sourceEvent.type === 'brush') return; // ignore zoom-by-brush
         let t = d3.event.transform;
+
         this.x.domain(t.rescaleX(this.x2).domain());
+        this.focus.selectAll("rect")
+              .attr("x", (d) => this.x(d.date)  )
+            //   .attr("y", (d) => this.height - this.y(d.price))
+              .attr('width', 5 * t.k * 0.1)
+
         // this.x.domain(t.rescaleX(this.x2).domain());
         this.xScale.domain(t.rescaleX(this.x2).domain());
         this.focus.select('.area2').attr('d', this.area);
         // console.log(this.focus.select('.area'))
         this.focus.selectAll('.line').attr('d', d => this.line(d.values));
         // console.log(this.lines.selectAll('.line'))
-        this.focus.select('.axis--x').call(this.xAxis);
+        this.focus.select('.axis--x').call(this.xAxis); // drow the axis
         this.context.select('.brush').call(this.brush.move, this.x.range().map(t.invertX, t));
     }
 
-    private drawChart(data: Stock[], data1: Stock[]) {
+    private drawChart(data: any) {
 
-        // this.parseDate = D3.timeParse("%Y");
     let data3 = []
-        this.data.forEach((d) =>{ 
-            
-            d.values.forEach((d: any) =>{
-                d.date = this.parseDate(d.date);
-                d.price = + d.price;    
-                data3.push(d);
+    
+    data.forEach((element) =>{ 
+        element.values.forEach((elm: any) =>{
+            elm.date = this.parseDate(elm.date);
+                // d.price = + d.price;  //   
+                data3.push(elm); // temporarly the origem one id thes.data 
             });
-        });
+    });
       
-      // this.yScale = D3.scaleLinear()
-      //   .domain([0, D3.max(this.data[2].values, d => d.price)])
-      //   .range([(this.height - this.margin.top), 0]);
-      
-      // this.y2Scale = D3.scaleLinear()
-      //   .domain([0, D3.max(this.data[2].values, d => d.price)])
-      //   .range([(this.height2 - this.margin.top), 0]);
-      
-      this.color = D3.scaleOrdinal(D3.schemeCategory10);
+        this.color = D3.scaleOrdinal(D3.schemeCategory10);
 
-
-        this.x.domain(d3Array.extent(data3, (d: Stock) => d.date));
-        this.y.domain([0, d3Array.max(data3, (d: Stock) => d.price)]);
+        this.x.domain([new Date(new Date(d3Array.extent(data3, (d: Stock) => d.date)[0]).getTime() - 2000000000),d3Array.extent(data3, (d: Stock) => d.date)[1]]); // d3Array.extent(data3, (d: Stock) => d.date) returns [Date object, Date object]
+        this.y.domain([0, d3Array.max(data3, (d: Stock) => d.price)]); //  [0, d3Array.max(data3, (d: Stock) => d.price)] returns [0, number]
         this.x2.domain(this.x.domain());
         this.y2.domain(this.y.domain());
+
+console.log(d3Array.extent(data3, (d: Stock) => d.date))
+// console.log([0, d3Array.max(data3, (d: Stock) => d.price)])
+// console.log(this.data[0].values)
 
         this.focus.selectAll('.line')
         .data(this.data).enter()
@@ -615,17 +575,60 @@ export class ChartTestComponent implements OnInit {
         //       .attr("x", (this.width - this.margin.top)/2)
         //       .attr("y", 5);
         //   })
-        .append('path')
-        .attr('class', 'line')  
-        .attr('d', d => this.line(d.values))
-        .style("fill", 'none')
-        .style('stroke', (d, i) => this.color(i+1))
+        // .append('path')
+        // .attr('class', 'line')  
+        // .attr('d', d => this.line(d.values))
+        // .style("fill", 'none')
+        // .style('stroke', (d, i) => this.color(i))
         // .style('opacity', this.lineOpacity)
 
         // this.focus.append('path')
         //     .datum(data)
         //     .attr('class', 'area')
         //     .attr('d', this.area);
+
+
+// bars section 
+console.log(this.data[0].values)
+
+       this.focus.selectAll('.rect')
+                 .data(this.data)
+                 .enter()
+                 .append('g')
+                 .attr('class', "rect")
+                 .attr('class', (d, i) => "rect rect" + i);
+
+
+        this.data.forEach((element, i) => {
+            this.focus.select(".rect" + i)
+                    .selectAll('rect')
+                    .data(element.values)
+                    .enter()
+                    .append('rect')
+                    .attr('x', (d) => this.x(d.date) )
+                    .attr('y', (d) =>   this.y(d.price)  )
+                    .attr('width', 5)
+                    .attr('height', (d) => this.height - this.y(d.price))                    
+                    .attr('fill', 'none')
+                    .attr('fill', this.color(i))
+                    // .style('opacity', 0.05)
+                    // .style('stroke', this.color(i))
+                    // .style('stroke-width', 3)
+            // console.log(this.focus.select(".rect" + i))
+
+                 })
+                 console.log(this.focus.selectAll(".rect"))
+    //    this.focus.selectAll("rect").node(d => console.log(d))
+                //  .data((d, i) => { d.i = i; return d.values})
+                //  .enter()
+                //  .append('rect')
+                //  .attr('x', (d) => this.x(d.date) )
+                //  .attr('y', (d) =>   this.y(d.price) )
+                //  .attr('width', 5)
+                //  .attr('height', (d) => this.height - this.y(d.price))
+                //  .attr('fill', (d) => this.color(d.i))
+
+
 
         this.focus.append('g')
             .attr('class', 'axis axis--x')
@@ -642,7 +645,7 @@ export class ChartTestComponent implements OnInit {
         //     .attr('d', this.area2);
 
         this.context.selectAll('.line')
-        .data(this.data).enter()
+        .data([this.data[0],this.data[1],this.data[2],this.data[3]]).enter()
         // .append('g')
         // .attr('class', 'line-group')  
         // .on("mouseover", (d, i) => {

@@ -69,16 +69,24 @@ export class StackedBarChartComponent implements OnInit {
     private drawChart(data: any[]) {
 
         let keys = Object.getOwnPropertyNames(data[0]).slice(1);
+        // console.log(keys);
 
         data = data.map(v => {
             v.total = keys.map(key => v[key]).reduce((a, b) => a + b, 0);
             return v;
         });
+
         data.sort((a: any, b: any) => b.total - a.total);
 
         this.x.domain(data.map((d: any) => d.State));
         this.y.domain([0, d3Array.max(data, (d: any) => d.total)]).nice();
         this.z.domain(keys);
+        
+console.log(data);
+console.log(keys);
+console.log(d3Shape.stack().keys(keys)(data));
+// console.log(data.map((d: any) => d.State));
+// console.log(this.z.domain(keys));
 
         this.g.append('g')
             .selectAll('g')
