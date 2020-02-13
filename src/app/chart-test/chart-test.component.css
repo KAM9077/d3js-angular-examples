@@ -1,9 +1,9 @@
-.area2 {
+.zoom-bars {
   fill: steelblue;
   clip-path: url(#clip);
 }
 
-.zoom2 {
+.zoom {
   cursor: move;
   fill: none;
   opacity: 0;

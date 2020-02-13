@@ -13,13 +13,6 @@ import * as d3TimeFormat from 'd3-time-format';
 import { SP500 } from '../shared';
 import { Generator } from '../shared';
 
-interface Margin {
-    top: number;
-    right: number;
-    bottom: number;
-    left: number;
-}
-
 interface Stock {
     date: any;
     price: any;
@@ -27,6 +20,7 @@ interface Stock {
 
 @Component({
   selector: 'app-chart-test',
+  encapsulation: ViewEncapsulation.None,
   templateUrl: './chart-test.component.html',
   styleUrls: ['./chart-test.component.css']
 })
@@ -44,6 +38,7 @@ export class ChartTestComponent implements OnInit {
 
 
     private svg: any;     // TODO replace all `any` by the right type
+    private drow: any;     // TODO replace all `any` by the right type
 
     private x: any;
     private x2: any;
@@ -68,6 +63,9 @@ export class ChartTestComponent implements OnInit {
     private line2: any;
     private lines: any;
     private focus: any;
+    private brushWidth: any;
+    private dropDownData: any = ['Year', 'Month', 'Week','Day'];
+    
 
     private parseDate = d3TimeFormat.timeParse('%b %Y');
 
@@ -410,17 +408,22 @@ export class ChartTestComponent implements OnInit {
         this.drawChart(this.data);
     }
 
+    public selected($event){
+        console.log($event)
+    }
+
     private mapDate(){
         this.data = []
-        let obj = this.generator.mapJson(['01/01/2005','01/01/2010'],[100, 2000]);
-        this.data = obj[49].child;
+        let obj = this.generator.mapJson(['01/01/2005','01/01/2010'],[100, 500]);
+        this.data = [obj[49].child[0]];
         console.log(obj[49].child)
 
     }
 
     private initMargins() {
-        this.margin = {top: 20, right: 20, bottom: 110, left: 40};
-        this.margin2 = {top: 430, right: 20, bottom: 30, left: 40};
+        this.margin = {top: 10, right: 5, bottom: 110, left: 40};
+        this.margin2 = {top: 430, right: 20, bottom: 30, left: 40, devided: 10 };
+        this.brushWidth = 50;
     }
 
     private parseData(data: any[]): Stock[] {
@@ -429,17 +432,19 @@ export class ChartTestComponent implements OnInit {
 
     private initSvg() {
         this.svg = d3.select('svg');
+        this.drow = this.svg.append('g')
+                        .attr('class', 'drow')
+                        .attr('transform', 'translate(' + this.margin.left + ',' + (0) + ')');;
 
-        this.width = +this.svg.attr('width') - this.margin.left - this.margin.right;
-        this.height = +this.svg.attr('height') - this.margin.top - this.margin.bottom;
-        this.height2 = +this.svg.attr('height') - this.margin2.top - this.margin2.bottom;
+        this.width = +this.svg.attr('width') * 0.6;
+        this.height = +this.svg.attr('height') * 0.6;
+        this.brushWidth = this.height/8; 
+        this.height2 = this.height + this.brushWidth;
 
-        // this.svg.attr('width', 1500);
-
-        this.x = d3Scale.scaleTime().range([0, this.width]);  // set the scale dimention that will be appeared depends on the start and the end ( [0, this.width] )
-        this.x2 = d3Scale.scaleTime().range([0, this.width]); // set the scale dimention that will be appeared depends on the start and the end ( [0, this.width] ) its for brush
+        this.x = d3Scale.scaleTime().range([0, this.width - this.margin.right]);  // set the scale dimention that will be appeared depends on the start and the end ( [0, this.width] )
+        this.x2 = d3Scale.scaleTime().range([0, this.width - this.margin.right]); // set the scale dimention that will be appeared depends on the start and the end ( [0, this.width] ) its for brush
         this.y = d3Scale.scaleLinear().range([this.height, 0]); // set the scale dimention that will be appeared depends on the start and the end ( [0, this.height] )
-        this.y2 = d3Scale.scaleLinear().range([this.height2, 0]); // set the scale dimention that will be appeared depends on the start and the end ( [0, this.height2] ) its for brush
+        this.y2 = d3Scale.scaleLinear().range([this.brushWidth, 0]); // set the scale dimention that will be appeared depends on the start and the end ( [0, this.height2] ) its for brush
 
         this.xAxis = d3Axis.axisBottom(this.x); 
         this.xAxis2 = d3Axis.axisBottom(this.x2);
@@ -453,7 +458,7 @@ console.log(this.height)
         .range([0, (this.width - this.margin.right)]);
 
         this.brush = d3Brush.brushX()
-            .extent([[0, 0], [this.width, this.height2]])
+            .extent([[0, 0], [this.width - this.margin.right, this.brushWidth]])
             .on('brush end', this.brushed.bind(this));
 
         this.zoom = d3Zoom.zoom()
@@ -470,34 +475,34 @@ console.log(this.height)
         .x(d => this.x(d.date))
         .y(d => this.y2(d.price));            
 
-        this.area = d3Shape.area()
-            .curve(d3Shape.curveMonotoneX)
-            .x((d: any) => this.x(d.date))
-            .y0(this.height)
-            .y1((d: any) => this.y(d.price));
+        // this.area = d3Shape.area()
+        //     .curve(d3Shape.curveMonotoneX)
+        //     .x((d: any) => this.x(d.date))
+        //     .y0(this.height)
+        //     .y1((d: any) => this.y(d.price));
 
-        this.area2 = d3Shape.area()
-            .curve(d3Shape.curveMonotoneX)
-            .x((d: any) => this.x2(d.date))
-            .y0(this.height2)
-            .y1((d: any) => this.y2(d.price));
+        // this.area2 = d3Shape.area()
+        //     .curve(d3Shape.curveMonotoneX)
+        //     .x((d: any) => this.x2(d.date))
+        //     .y0(this.brushWidth)
+        //     .y1((d: any) => this.y2(d.price));
 
-        this.svg.append('defs').append('clipPath')
+        this.drow.append('defs').append('clipPath')
             .attr('id', 'clip')
             .append('rect')
-            .attr('width', this.width)
+            .attr('width', this.width - this.margin.right)
             .attr('height', this.height);
 
-            this.lines = this.svg.append('g')
-            .attr('class', 'lines');            
+            // this.lines = this.svg.append('g')
+            // .attr('class', 'lines');            
 
-        this.focus = this.svg.append('g')
+        this.focus = this.drow.append('g')
             .attr('class', 'focus')
             .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')');
 
-        this.context = this.svg.append('g')
+        this.context = this.drow.append('g')
             .attr('class', 'context')
-            .attr('transform', 'translate(' + this.margin2.left + ',' + this.margin2.top + ')');
+            .attr('transform', 'translate(' + this.margin2.left + ',' + (this.height2 + this.margin2.devided) + ')');
     }
 
     private brushed() {
@@ -505,16 +510,14 @@ console.log(this.height)
         let s = d3.event.selection || this.x2.range();
         this.x.domain(s.map(this.x2.invert, this.x2));
         this.focus.selectAll("rect")
-              .attr("x", (d) => this.x(d.date)  )
-            //   .attr("y", (d) => this.height - this.y(d.price))
-              .attr('width', 1)
+                  .attr("x", (d) => this.x(d.date))
 
         this.xScale.domain(s.map(this.x2.invert, this.x2));
         this.focus.select('.area2').attr('d', this.area);
         // console.log(this.focus.select('.area2'))
-        this.focus.selectAll('.line').attr('d', d => this.line(d.values));
+        // this.focus.selectAll('.line').attr('d', d => this.line(d.values));
         this.focus.select('.axis--x').call(this.xAxis); // drow the axis
-        this.svg.select('.zoom2').call(this.zoom.transform, d3Zoom.zoomIdentity
+        this.drow.select('.zoom').call(this.zoom.transform, d3Zoom.zoomIdentity
             .scale(this.width / (s[1] - s[0]))
             .translate(-s[0], 0));
     }
@@ -526,21 +529,20 @@ console.log(this.height)
         this.x.domain(t.rescaleX(this.x2).domain());
         this.focus.selectAll("rect")
               .attr("x", (d) => this.x(d.date)  )
-            //   .attr("y", (d) => this.height - this.y(d.price))
-              .attr('width', 5 * t.k * 0.1)
+              .attr('width', 3 * t.k)
 
         // this.x.domain(t.rescaleX(this.x2).domain());
         this.xScale.domain(t.rescaleX(this.x2).domain());
-        this.focus.select('.area2').attr('d', this.area);
+        // this.focus.select('.area2').attr('d', this.area);
         // console.log(this.focus.select('.area'))
-        this.focus.selectAll('.line').attr('d', d => this.line(d.values));
+        // this.focus.selectAll('.line').attr('d', d => this.line(d.values));
         // console.log(this.lines.selectAll('.line'))
         this.focus.select('.axis--x').call(this.xAxis); // drow the axis
         this.context.select('.brush').call(this.brush.move, this.x.range().map(t.invertX, t));
     }
 
     private drawChart(data: any) {
-
+        console.log(this.drow.select('#h9').attr('class', 'h9'))
     let data3 = []
     
     data.forEach((element) =>{ 
@@ -562,12 +564,12 @@ console.log(d3Array.extent(data3, (d: Stock) => d.date))
 // console.log([0, d3Array.max(data3, (d: Stock) => d.price)])
 // console.log(this.data[0].values)
 
-        this.focus.selectAll('.line')
-        .data(this.data).enter()
+        // this.focus.selectAll('.line')
+        // .data(this.data).enter()
         // .append('g')
         // .attr('class', 'line-group')  
         // .on("mouseover", (d, i) => {
-        //   this.svg.append("text")
+        //   this.drow.append("text")
         //       .attr("class", "title-text")
         //       .style("fill", this.color(i))        
         //       .text(d.name)
@@ -576,7 +578,7 @@ console.log(d3Array.extent(data3, (d: Stock) => d.date))
         //       .attr("y", 5);
         //   })
         // .append('path')
-        // .attr('class', 'line')  
+        // .attr('class', 'zoom-bars')  
         // .attr('d', d => this.line(d.values))
         // .style("fill", 'none')
         // .style('stroke', (d, i) => this.color(i))
@@ -589,15 +591,15 @@ console.log(d3Array.extent(data3, (d: Stock) => d.date))
 
 
 // bars section 
-console.log(this.data[0].values)
+// console.log(this.data[0].values)
 
        this.focus.selectAll('.rect')
                  .data(this.data)
                  .enter()
                  .append('g')
                  .attr('class', "rect")
+                //  .style('clip-path', 'url(#clip)')
                  .attr('class', (d, i) => "rect rect" + i);
-
 
         this.data.forEach((element, i) => {
             this.focus.select(".rect" + i)
@@ -605,19 +607,46 @@ console.log(this.data[0].values)
                     .data(element.values)
                     .enter()
                     .append('rect')
+                    .attr('class', 'zoom-bars')
                     .attr('x', (d) => this.x(d.date) )
                     .attr('y', (d) =>   this.y(d.price)  )
-                    .attr('width', 5)
+                    .attr('width', 3)
                     .attr('height', (d) => this.height - this.y(d.price))                    
                     .attr('fill', 'none')
                     .attr('fill', this.color(i))
                     // .style('opacity', 0.05)
                     // .style('stroke', this.color(i))
                     // .style('stroke-width', 3)
-            // console.log(this.focus.select(".rect" + i))
+        });
 
-                 })
-                 console.log(this.focus.selectAll(".rect"))
+
+       this.context.selectAll('.rect')
+                 .data(this.data)
+                 .enter()
+                 .append('g')
+                 .attr('class', "rect")
+                //  .style('clip-path', 'url(#clip)')
+                 .attr('class', (d, i) => "rect rect" + i);
+
+        this.data.forEach((element, i) => {
+            this.context.select(".rect" + i)
+                    .selectAll('rect')
+                    .data(element.values)
+                    .enter()
+                    .append('rect')
+                    .attr('class', 'zoom-bars')
+                    .attr('x', (d) => this.x(d.date) )
+                    .attr('y', (d) =>   this.y2(d.price)  )
+                    .attr('width', 3)
+                    .attr('height', (d) => this.brushWidth - this.y2(d.price))                    
+                    .attr('fill', 'none')
+                    .attr('fill', this.color(i))
+                    // .style('opacity', 0.05)
+                    // .style('stroke', this.color(i))
+                    // .style('stroke-width', 3)
+        });        
+
+                //  console.log(this.focus.selectAll(".rect"))
     //    this.focus.selectAll("rect").node(d => console.log(d))
                 //  .data((d, i) => { d.i = i; return d.values})
                 //  .enter()
@@ -631,25 +660,37 @@ console.log(this.data[0].values)
 
 
         this.focus.append('g')
-            .attr('class', 'axis axis--x')
-            .attr('transform', 'translate(0,' + this.height + ')')
-            .call(this.xAxis);
+                  .attr('class', 'axis axis--x')
+                  .attr('transform', 'translate(0,' + this.height + ')')
+                  .call(this.xAxis);
 
         this.focus.append('g')
-            .attr('class', 'axis axis--y')
-            .call(this.yAxis);
+                  .attr('class', 'axis axis--y')
+                  .call(this.yAxis);
+        
+        this.focus.append('g')
+                  .attr('transform', 'translate(' + this.width / 2 + ',' + (this.height + 35)  + ')')
+                  .append('text')
+                  .attr('text-anchor',"middle")
+                  .text('AAAAAAAAAAAAAAAAAAA')
 
+        this.context.append('g')
+                  .attr('transform', 'translate(-' + 1.5 * this.margin2.left + ',-' + (this.height2/2)  + ')')
+                  .append('text')
+                  .attr('text-anchor',"middle")
+                  .text('BBBBBBBBBBBBBB')                  
+                  .attr('transform', 'rotate(90' + ')')
         // this.context.append('path')
         //     .datum(data)
         //     .attr('class', 'area2')
         //     .attr('d', this.area2);
 
-        this.context.selectAll('.line')
-        .data([this.data[0],this.data[1],this.data[2],this.data[3]]).enter()
+        // this.context.selectAll('.line')
+        // .data([this.data[0],this.data[1],this.data[2],this.data[3]]).enter()
         // .append('g')
         // .attr('class', 'line-group')  
         // .on("mouseover", (d, i) => {
-        //   this.svg.append("text")
+        //   this.drow.append("text")
         //       .attr("class", "title-text")
         //       .style("fill", this.color(i))        
         //       .text(d.name)
@@ -657,29 +698,28 @@ console.log(this.data[0].values)
         //       .attr("x", (this.width - this.margin.top)/2)
         //       .attr("y", 5);
         //   })
-        .append('path')
-        .attr('class', 'line')  
-        .attr('d', d => this.line2(d.values))
-        .style("fill", 'none')
-        .style('stroke', (d, i) => this.color(i+1))
+        // .append('path')
+        // .attr('class', 'zoom-bars')  
+        // .attr('d', d => this.line2(d.values))
+        // .style("fill", 'none')
+        // .style('stroke', (d, i) => this.color(i+1))
 
         this.context.append('g')
             .attr('class', 'axis axis--x')
-            .attr('transform', 'translate(0,' + this.height2 + ')')
+            .attr('transform', 'translate(0,' + (this.brushWidth) + ')')
             .call(this.xAxis2);
 
         this.context.append('g')
-            .attr('class', 'brush')
-            .call(this.brush)
-            .call(this.brush.move, this.x.range());
+                    .attr('class', 'brush')
+                    .call(this.brush)
+                    .call(this.brush.move, this.x.range());
 
-        this.svg.append('rect')
-            .attr('class', 'zoom2')
-            .style('opacity', 0)
-            .attr('width', this.width)
-            .attr('height', this.height)
-            .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')')
-            .call(this.zoom);
+        this.drow.append('rect')
+                 .attr('class', 'zoom')
+                 .attr('width', this.width)
+                 .attr('height', this.height)
+                 .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')')
+                 .call(this.zoom);
     }
 
 }
