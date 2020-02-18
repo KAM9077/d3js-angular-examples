@@ -3,9 +3,23 @@
   clip-path: url(#clip);
 }
 
+.zoom-lines {
+  fill: steelblue;
+  clip-path: url(#clip);
+}
+
 .zoom {
   cursor: move;
   fill: none;
   opacity: 0;
   pointer-events: all;
+}
+
+.filter {
+  display: block;
+}
+
+.filter-child {
+  display: inline-block;
+  margin: 3px;
 }

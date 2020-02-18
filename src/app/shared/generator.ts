@@ -9,9 +9,9 @@ export class Generator {
 
 constructor() { }
 
-    dateFormater = (time, i) => {
-        time = new Date(time + i * 2645280000).toDateString().split(' ')
-        return '' + time[1] + ' ' +  time[3];
+    dateFormater = (time) => {
+        time = new Date(time).toDateString().split(' ')
+        return '' + time[1] + ' ' + time[2] + ' ' +  time[3];
     }
 
     ArrOfObjs = (dataRang, valueRange) => {
@@ -21,9 +21,14 @@ constructor() { }
         let startMonth: any = new Date(dataRang[0]).getMonth();
         let endMonth: any = new Date(dataRang[1]).getMonth();
         // let start: any = new Date(dataRang[0]); 
-        let end = Math.abs(endYear - startYear) * 12 - startMonth - endMonth;
+        // let end = Math.abs(endYear - startYear) * 12 - startMonth - endMonth;
+        // let start = Math.abs(dataRang[1].getTime());
         let start = new Date(dataRang[0]).getTime();
-
+        let end = new Date(dataRang[1]).getTime();
+        // console.log(end);
+        // console.log(start);
+        let steps = (end - start) / 86400000;
+        
 
         let obj: any;
         let arr: any = [];
@@ -31,13 +36,11 @@ constructor() { }
         let min = Math.min(valueRange[0], valueRange[1])
         let value :number; 
 
-
-
-        for (let i = 0; i < end ; i++) {
+        for (let i = 0; i < steps ; i++) {
             // for (let k = 0; k < numb2 ; k++) {
                 value =  parseInt(Math.random() * (max - min) + min + '')
             // }
-            arr.push({date: this.dateFormater(start, i) , price : value})
+            arr.push({date: this.dateFormater(start + i * 86400000) , price : value})
         }
         return arr;
     };
