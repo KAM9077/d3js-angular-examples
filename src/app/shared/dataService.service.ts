@@ -21,7 +21,7 @@ export class DataService {
   }
 
   getData(){
-        return this.http.get("https://jsonplaceholder.typicode.com/todos")
+        return this.http.get("http://localhost:8080/DemoAPI/JsonServlet")
             .pipe(map(data => {
             //   catchError(this.handel.handleError);
             let aaa = data;
