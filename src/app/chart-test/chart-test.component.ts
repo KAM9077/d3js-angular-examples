@@ -59,8 +59,6 @@ export class ChartTestComponent implements OnInit {
     private yAxis: any;
 
     private xScale:any;
-    private yScale:any;
-    private y2Scale:any;
     private color:any;
 
     private context: any;
@@ -83,6 +81,7 @@ export class ChartTestComponent implements OnInit {
     private parseDate = d3TimeFormat.timeParse('%b %d %Y');
 
     private data: any =  this.getData();
+    private currentData: any;
 
     constructor(
         public generator : Generator,
@@ -115,14 +114,15 @@ export class ChartTestComponent implements OnInit {
             name: "chart"
             }]
             // console.log(obj);
-            this.data = obj
+            this.data = obj;
+            this.currentData = obj;
             this.drwoPermanent(obj);
             this.drawChart(obj);
         })
     }
 
     public drawNode(d){
-        
+        this.currentData = d;
         this.drwoPermanent(d);
         this.drawChart(d);
     }
@@ -135,7 +135,7 @@ export class ChartTestComponent implements OnInit {
         console.log(this.focus)
         this.chartType = type;
         // this.mapDate();
-        this.drawChart(this.data);
+        this.drawNode(this.currentData);
     }
 
     private mapDate(){
@@ -229,6 +229,20 @@ export class ChartTestComponent implements OnInit {
         this.context = this.drow.append('g')
             .attr('class', 'context')
             .attr('transform', 'translate(' + this.margin2.left + ',' + (this.height2 + this.margin2.devided) + ')');
+
+        this.focus
+                .append('rect')
+                .attr('class', 'zoom')
+                .attr('width', this.width)
+                .attr('height', this.height)
+                .attr('transform', 'translate(' + 0 + ',' + 0 + ')')
+                .on('contextmenu', () => {
+                    // console.log(this.focus.select('.bars')._groups[0][0].__data__);
+                    this.focus.select('.bars')._groups[0][0].__data__.parent ? 
+                    this.drawNode([this.focus.select('.bars')._groups[0][0].__data__.parent]) : null;
+                    // this.focus.select('.bars')
+                })
+                .call(this.zoom);            
     }
 
     private brushed() {
@@ -238,7 +252,7 @@ export class ChartTestComponent implements OnInit {
         this.xScale.domain(s.map(this.x2.invert, this.x2));
 
         if(this.chartType == 'Bars'){
-            this.focus.selectAll("rect")
+            this.focus.selectAll(".zoom-bars")
                   .attr("x", (d) => this.x(d.data.date));
         }else{
             this.focus.selectAll('.zoom-lines').attr('d', d => this.line(d.child));
@@ -326,13 +340,13 @@ export class ChartTestComponent implements OnInit {
         //             .call(this.brush)
         //             .call(this.brush.move, this.x.range()); 
 
-        this.focus
-                .append('rect')
-                .attr('class', 'zoom')
-                .attr('width', this.width)
-                .attr('height', this.height)
-                .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')')
-                .call(this.zoom);
+        // this.focus
+        //         .append('rect')
+        //         .attr('class', 'zoom')
+        //         .attr('width', this.width)
+        //         .attr('height', this.height)
+        //         // .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')')
+        //         .call(this.zoom);
         }
 
         // bars section 
@@ -343,7 +357,7 @@ export class ChartTestComponent implements OnInit {
             this.focus.selectAll('.line-group').remove();
             this.context.selectAll('.line-group').remove();
             this.context.selectAll('.brush').remove();
-            this.drow.selectAll('.zoom').remove();
+            // this.drow.selectAll('.zoom').remove();
 
             this.context.selectAll('.bars').remove();
             this.focus.selectAll('.bars').remove();            
@@ -361,18 +375,18 @@ export class ChartTestComponent implements OnInit {
                         .call(this.brush)
                         .call(this.brush.move, this.x.range()); 
 
-            this.focus.select('.bars' )
-                      .append('rect')
-                      .attr('class', 'zoom')
-                      .attr('width', this.width)
-                      .attr('height', this.height)
-                      .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')')
-                      .call(this.zoom);
+            // this.focus.select('.bars' )
+            //           .append('rect')
+            //           .attr('class', 'zoom')
+            //           .attr('width', this.width)
+            //           .attr('height', this.height)
+            //           .attr('transform', 'translate(' + this.margin.left + ',' + this.margin.top + ')')
+            //           .call(this.zoom);
                                          
 
             data.forEach((element, i) => {
                 this.focus.select(".rect" + i)
-                        .selectAll('rect')
+                        .selectAll('zoom-bars')
                         .data(element.child)
                         .enter()
                         .append('rect')
@@ -381,11 +395,13 @@ export class ChartTestComponent implements OnInit {
                         .attr('y', (d) =>   this.y(d.data.price)  )
                         .attr('width', 3)
                         .attr('height', (d) => this.height - this.y(d.data.price))                    
+                        // .attr('height', (d) => this.height - this.y(d.data.price)).transition().duration(500)                    
                         .attr('fill', 'none')
                         .attr('fill', this.color(i))
                         .on("click", (d, i) => {
-                            this.data = [d]
-                            this.drawNode([d])
+                            d.parent = this.focus.select('.bars')._groups[0][0].__data__;
+                            this.data = d.parent;
+                            d.data.id !== 3 ?  this.drawNode([d]) : null;
                         })
                         .on("mouseover", (d, i) => { 
                         this.drow
@@ -430,6 +446,41 @@ export class ChartTestComponent implements OnInit {
                                 .style("opacity", 0)
                                 .remove();
                         })                        
+                        .on("contextmenu", (d, i) => { 
+                            this.drow
+                                .selectAll('.title-popup')
+                                .remove();
+    
+                            let position = D3.event;
+                            let popup;
+                            
+                            // console.log(position.offsetX)
+                            // console.log(position.offsetY)
+    
+                            popup = this.drow
+                                .append("g")
+                                .attr("class", "title-popup")       
+                                .attr('transform', 'translate(' + (position.offsetX - 45) + ',' + (position.offsetY - 10) + ')');
+    //'M 0,0 L -10,-10 H -85 Q -90,-10 -90,-15 V -65 Q -90,-70 -85,-70 H 85 Q 90,-70 90,-65 V -15 Q 90,-10 85,-10  H 10 L 0,0 z'
+                            popup
+                                .append("path")
+                                .attr("class", "title-rect")
+                                .attr('d', "M 0,0 L -10,-10 H -85 Q -90,-10 -90,-15 V -65 Q -90,-70 -85,-70 H 85 Q 90,-70 90,-65 V -15 Q 90,-10 85,-10  H 10 L 0,0 z")
+                                .style("fill", this.color(15))        
+                                .style("stroke", this.color(10))        
+                                .style("opacity", 0.7)        
+                                // .attr("x", -50)
+                                // .attr("y", -15);
+    
+                            popup
+                                .append("text")
+                                .text('More Details')
+                                .attr("class", "title-text")
+                                .style("fill", this.color(10))        
+                                .attr("text-anchor", "middle")
+                                .attr("x", 5)
+                                .attr("y", -35);
+                        })                    
 
             });
 
@@ -467,7 +518,7 @@ export class ChartTestComponent implements OnInit {
     }
 
     private drwoPermanent(data:any){
-
+console.log(data)
         this.focus.selectAll('.axis--x').remove();
         this.focus.selectAll('.axis--y').remove();        
         this.context.selectAll('.axis--x').remove();        
@@ -479,18 +530,21 @@ export class ChartTestComponent implements OnInit {
             element.child.forEach((elm: any) =>{
                 time.push(new Date(elm.data.date).getTime())
                 // console.log(elm.date)  
-                elm.data.id == 1 ? elm.data.date = this.parseYearDate(elm.data.date) : 
-                elm.data.id == 2 ? elm.data.date = this.parseMonthDate(elm.data.date):
-                elm.data.id == 3 ? elm.data.date = this.parseDayDate(elm.data.date):
-                elm.date = this.parseDate(elm.date);
+                elm.data.date = new Date(elm.data.date);
+                // elm.data.id == 1 ? elm.data.date = this.parseYearDate(elm.data.date) : 
+                // elm.data.id == 2 ? elm.data.date = this.parseMonthDate(elm.data.date):
+                // elm.data.id == 3 ? elm.data.date = this.parseDayDate(elm.data.date):
+                // console.log(this.parseYearDate(elm.data.date))
+                // elm.date = this.parseDate(elm.date);
                     // d.data.price = + d.data.price;  // 
-                    data3.push(elm); // temporarly the origem one id thes.data 
+                    data3.push(elm); // temporally the origen one id this.data 
                 });
         });
 
         this.color = D3.scaleOrdinal(D3.schemeCategory10);
+        let drift = (time[1] - time[0])/2; 
 
-        this.x.domain([Math.min(...time) - 172800000, Math.max(...time) + 172800000]); // d3Array.extent(data3, (d: Stock) => d.data.date) returns [Date object, Date object]
+        this.x.domain([Math.min(...time) - drift, Math.max(...time) + drift]); // d3Array.extent(data3, (d: Stock) => d.data.date) returns [Date object, Date object]
         this.y.domain([0, d3Array.max(data3, (d) => d.data.price)]); //  [0, d3Array.max(data3, (d: Stock) => d.data.price)] returns [0, number]
         this.x2.domain(this.x.domain());
         this.y2.domain(this.y.domain());
