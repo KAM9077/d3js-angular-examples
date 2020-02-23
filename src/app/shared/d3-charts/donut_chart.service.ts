@@ -7,7 +7,9 @@ import { HttpClient, HttpEvent, HttpRequest, HttpHeaders } from '@angular/common
 import { Observable, throwError } from 'rxjs';
 
 
+
 import { Component, ViewEncapsulation, OnInit } from '@angular/core';
+import * as D3 from 'd3';
 import * as d3 from 'd3-selection';
 import * as d3Scale from 'd3-scale';
 import * as d3Shape from 'd3-shape';
@@ -63,6 +65,17 @@ export class DonutChartService {
   //         .attr('transform', 'translate(' + this.width / 2 + ',' + this.height / 2 + ')');
   // }
 
+  public textRadius(d, radius) {
+    const PI = Math.PI
+    const angle90 = Math.PI * 90 / 180
+    let angleBand = (d.endAngle - d.startAngle)/2;
+    let angle = (d.startAngle + angleBand) - angle90;
+    console.log(angle)
+    let x = radius * Math.cos(angle);
+    let y = radius * Math.sin(angle);
+    return [x, y]; 
+  }
+
   public drawChart(data: any[], svg, title, value, fontSize) {
 
     // this.svg = d3.select('svg');
@@ -71,8 +84,7 @@ export class DonutChartService {
     this.height = +svg.attr('height');
     this.radius = Math.min(this.width, this.height) / 2;
 
-    this.color = d3Scale.scaleOrdinal()
-        .range(['#98abc5', '#8a89a6', '#7b6888', '#6b486b', '#a05d56', '#d0743c', '#ff8c00']);
+    this.color = D3.scaleOrdinal(D3.schemeCategory10)
 
 
       this.arc = d3Shape.arc()
@@ -95,10 +107,11 @@ export class DonutChartService {
 
       g.append('path')
           .attr('d', this.arc)
-          .style('fill', d => this.color(d.data[title]));
+          .style('fill', (d,i) => this.color(i))
+          .style('opacity', 0.7);
 
       g.append('text')
-          .attr('transform', d => 'translate(' + this.arc.centroid(d) + ')')
+          .attr('transform', (d) => {console.log(this.textRadius(d, this.radius)); return 'translate(' +  this.textRadius(d, this.radius)  + ')'})
           .attr('dy', '.1em')
           .attr('font-size', fontSize + 'px')
           .text(d => d.data[title]);
