@@ -112,7 +112,7 @@ export class DonutChartService {
 
       g.append('text')
           .attr('transform', (d) => {console.log(this.textRadius(d, this.radius)); return 'translate(' +  this.textRadius(d, this.radius)  + ')'})
-          .attr('dy', '.1em')
+          .attr('text-anchor',"middle")
           .attr('font-size', fontSize + 'px')
           .text(d => d.data[title]);
   }
