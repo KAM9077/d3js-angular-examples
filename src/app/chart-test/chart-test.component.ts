@@ -16,6 +16,7 @@ import * as d3Zoom from 'd3-zoom';
 import * as d3Brush from 'd3-brush';
 import * as d3Array from 'd3-array';
 import * as d3TimeFormat from 'd3-time-format';
+import { DonutChartService, POPULATION } from '../shared';
 
 import { SP500 } from '../shared';
 import { Generator } from '../shared';
@@ -86,7 +87,8 @@ export class ChartTestComponent implements OnInit {
     constructor(
         public generator : Generator,
         public formBuilder : FormBuilder,
-        public dataService : DataService
+        public dataService : DataService,
+        public donutChartService : DonutChartService
         ) {
     }
 
@@ -274,7 +276,7 @@ export class ChartTestComponent implements OnInit {
         if(this.chartType == 'Bars'){
             this.focus.selectAll(".zoom-bars")
                   .attr("x", (d) => this.x(d.data.date))
-                  .attr('width', 3 * t.k);
+                  .attr('width', 5 * t.k);
         }else{
             this.focus.selectAll('.zoom-lines').attr('d', d => this.line(d.child));
         };
@@ -287,6 +289,7 @@ export class ChartTestComponent implements OnInit {
         // if (d3.event.sourceEvent && d3.event.sourceEvent.type === 'brush') return; // ignore zoom-by-brush
         // let t = d3.event.transform;
         // console.log(t)
+// data.sort((a, b) => b.date - a.date)
 
         this.x2.domain(this.x.domain());
         this.y2.domain(this.y.domain());
@@ -390,15 +393,18 @@ export class ChartTestComponent implements OnInit {
                         .data(element.child)
                         .enter()
                         .append('rect')
-                        .attr('class', 'zoom-bars')
-                        .attr('x', (d) => this.x(d.data.date) )
-                        .attr('y', (d) =>   this.y(d.data.price)  )
-                        .attr('width', 3)
+                        .attr('class', (d,k) =>  'zoom-bars zoom-bars' + k)
+                        .attr('x', 0)
+                        .attr('y', (d) => this.y(d.data.price))
+                        .attr('width', 0)
                         .attr('height', (d) => this.height - this.y(d.data.price))                    
                         // .attr('height', (d) => this.height - this.y(d.data.price)).transition().duration(500)                    
                         .attr('fill', 'none')
                         .attr('fill', this.color(i))
-                        .on("click", (d, i) => {
+                        .on("click", (d,i,n) => {
+// console.log(D3.select(n[i]));
+// console.log(this.focus.select('.zoom'));
+                        // D3.select(n[i]).transition().duration(1000).attr('height', 10)
                             d.parent = this.focus.select('.bars')._groups[0][0].__data__;
                             this.data = d.parent;
                             d.data.id !== 3 ?  this.drawNode([d]) : null;
@@ -447,6 +453,7 @@ export class ChartTestComponent implements OnInit {
                                 .remove();
                         })                        
                         .on("contextmenu", (d, i) => { 
+
                             this.drow
                                 .selectAll('.title-popup')
                                 .remove();
@@ -460,28 +467,56 @@ export class ChartTestComponent implements OnInit {
                             popup = this.drow
                                 .append("g")
                                 .attr("class", "title-popup")       
+                                .attr("width", 250)       
+                                .attr("height", 250)       
                                 .attr('transform', 'translate(' + (position.offsetX - 45) + ',' + (position.offsetY - 10) + ')');
-    //'M 0,0 L -10,-10 H -85 Q -90,-10 -90,-15 V -65 Q -90,-70 -85,-70 H 85 Q 90,-70 90,-65 V -15 Q 90,-10 85,-10  H 10 L 0,0 z'
-                            popup
-                                .append("path")
-                                .attr("class", "title-rect")
-                                .attr('d', "M 0,0 L -10,-10 H -85 Q -90,-10 -90,-15 V -65 Q -90,-70 -85,-70 H 85 Q 90,-70 90,-65 V -15 Q 90,-10 85,-10  H 10 L 0,0 z")
-                                .style("fill", this.color(15))        
-                                .style("stroke", this.color(10))        
-                                .style("opacity", 0.7)        
-                                // .attr("x", -50)
-                                // .attr("y", -15);
+    // //'M 0,0 L -10,-10 H -85 Q -90,-10 -90,-15 V -65 Q -90,-70 -85,-70 H 85 Q 90,-70 90,-65 V -15 Q 90,-10 85,-10  H 10 L 0,0 z'
+    //                         popup
+    //                             .append("path")
+    //                             .attr("class", "title-rect")
+    //                             .attr('d', "M 0,0 L -10,-10 H -85 Q -90,-10 -90,-15 V -65 Q -90,-70 -85,-70 H 85 Q 90,-70 90,-65 V -15 Q 90,-10 85,-10  H 10 L 0,0 z")
+    //                             .style("fill", this.color(15))        
+    //                             .style("stroke", this.color(10))        
+    //                             .style("opacity", 0.7)        
+    //                             // .attr("x", -50)
+    //                             // .attr("y", -15);
     
-                            popup
-                                .append("text")
-                                .text('More Details')
-                                .attr("class", "title-text")
-                                .style("fill", this.color(10))        
-                                .attr("text-anchor", "middle")
-                                .attr("x", 5)
-                                .attr("y", -35);
+    //                         popup
+    //                             .append("text")
+    //                             .text('More Details')
+    //                             .attr("class", "title-text")
+    //                             .style("fill", this.color(10))        
+    //                             .attr("text-anchor", "middle")
+    //                             .attr("x", 5)
+    //                             .attr("y", -35);
+
+                        let values = []
+                        d.values.forEach((element, i) => {
+                            values.push({date:element.date.slice(0,3), price:element.price })
+                            i == d.values.length- 1 ? this.donutChartService.drawChart(values, popup, 'date', 'price', 10) : null;
+                        })
+
+                                // this.donutChartService.drawChart(values, popup, 'date', 'price');
                         })                    
 
+            });
+
+            data.forEach((element, i) => {
+                element.child.forEach((elm,k) => {
+                    // console.log(this.focus.select('.zoom-bars' + k))
+                    this.focus.select('.zoom-bars' + k)
+                // this.focus
+                // .select((d,k) =>  '.zoom-bars' + k)
+                // .select('rect')
+                // .attr('y', (d) =>   this.y(d.data.price))
+                .transition().duration(2000 - k * 50 )
+                .attr('x', this.x(elm.data.date))
+                        .attr('width', 5)
+                        // .attr('height', this.height - this.y(elm.data.price) + 30)                    
+                        // .attr('height', (d) => this.height - this.y(d.data.price)).transition().duration(500)                    
+                        // .attr('fill', 'none')
+                        // .attr('fill', this.color(i))               
+            });
             });
 
             this.context.selectAll('.bars')
@@ -518,10 +553,12 @@ export class ChartTestComponent implements OnInit {
     }
 
     private drwoPermanent(data:any){
-console.log(data)
+
         this.focus.selectAll('.axis--x').remove();
         this.focus.selectAll('.axis--y').remove();        
+        this.focus.selectAll('.text').remove();        
         this.context.selectAll('.axis--x').remove();        
+        this.context.selectAll('.text').remove();        
 
         let data3 = []
         let time = []
@@ -564,27 +601,31 @@ console.log(data)
                 .call(this.yAxis);
       
       this.focus.append('g')
+                .attr('class', 'text')
                 .attr('transform', 'translate(' + this.width / 2 + ',' + (this.height + 35)  + ')')
                 .append('text')
                 .attr('text-anchor',"middle")
                 .text('AAAAAAAAAAAAAAAAAAA')
 
       this.context.append('g')
-                .attr('transform', 'translate(-' + 1.5 * this.margin2.left + ',-' + (this.height2/2)  + ')')
-                .append('text')
-                .attr('text-anchor',"middle")
+                  .attr('class', 'text')
+                  .attr('transform', 'translate(-' + 1.5 * this.margin2.left + ',-' + (this.height2/2)  + ')')
+                  .append('text')
+                  .attr('text-anchor',"middle")
+                  .text('BBBBBBBBBBBBBB')                  
                 .text('BBBBBBBBBBBBBB')                  
-                .attr('transform', 'rotate(90' + ')')
+                  .text('BBBBBBBBBBBBBB')                  
+                  .attr('transform', 'rotate(90' + ')')
 
       this.context.append('g')
                   .attr('class', 'axis axis--x')
                   .attr('transform', 'translate(0,' + (this.brushWidth) + ')')
                   .call(this.xAxis2);
 
-      this.context.append('g')
-                  .attr('class', 'brush')
-                  .call(this.brush)
-                  .call(this.brush.move, this.x.range());
+    //   this.context.append('g')
+    //               .attr('class', 'brush')
+    //               .call(this.brush)
+    //               .call(this.brush.move, this.x.range());
 
     //   this.focus.select('.bars')
     //            .append('rect')

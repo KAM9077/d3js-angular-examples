@@ -6,3 +6,4 @@ export * from './sp500';
 export * from './population';
 export * from './generator';
 export * from './dataService.service';
+export * from './d3-charts/donut_chart.service';
