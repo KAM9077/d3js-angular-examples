@@ -111,10 +111,12 @@ export class DonutChartService {
           .style('opacity', 0.7);
 
       g.append('text')
-          .attr('transform', (d) => {console.log(this.textRadius(d, this.radius)); return 'translate(' +  this.textRadius(d, this.radius)  + ')'})
-          .attr('text-anchor',"middle")
-          .attr('font-size', fontSize + 'px')
-          .text(d => d.data[title]);
+      .attr("transform", (d) => { 
+        let midAngle = d.endAngle < Math.PI ? (d.startAngle + d.endAngle)/2 : (d.startAngle + d.endAngle)/2 + Math.PI ;
+        return "translate(" + this.textRadius(d, this.radius)[0] + "," + this.textRadius(d, this.radius + 15)[1] + ") rotate(-90) rotate(" + (midAngle * 180/Math.PI) + ")"})
+      // .attr("dy", ".35em")
+      .attr('text-anchor','middle')
+      .text(d => d.data[title]);
   }
 
 }
