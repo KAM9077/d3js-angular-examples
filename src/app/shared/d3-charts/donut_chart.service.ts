@@ -108,15 +108,25 @@ export class DonutChartService {
       g.append('path')
           .attr('d', this.arc)
           .style('fill', (d,i) => this.color(i))
-          .style('opacity', 0.7);
+          .style('opacity', 1);
 
       g.append('text')
       .attr("transform", (d) => { 
         let midAngle = d.endAngle < Math.PI ? (d.startAngle + d.endAngle)/2 : (d.startAngle + d.endAngle)/2 + Math.PI ;
         return "translate(" + this.textRadius(d, this.radius)[0] + "," + this.textRadius(d, this.radius + 15)[1] + ") rotate(-90) rotate(" + (midAngle * 180/Math.PI) + ")"})
       // .attr("dy", ".35em")
+      .attr('font-size', 14)
       .attr('text-anchor','middle')
       .text(d => d.data[title]);
+      
+      g.append('text')
+      .attr("transform", (d) => { 
+        let midAngle = d.endAngle < Math.PI ? (d.startAngle + d.endAngle)/2 : (d.startAngle + d.endAngle)/2 + Math.PI ;
+        return "translate(" + this.textRadius(d, this.radius - 45)[0] + "," + this.textRadius(d, this.radius - 45)[1] + ") rotate(-90) rotate(" + (midAngle * 180/Math.PI) + ")"})
+      // .attr("dy", ".35em")
+      .attr('text-anchor','middle')
+      .attr('font-size', 12)
+      .text(d => d.data[value]);
   }
 
 }

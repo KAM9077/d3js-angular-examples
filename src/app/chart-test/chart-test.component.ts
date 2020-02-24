@@ -428,18 +428,18 @@ export class ChartTestComponent implements OnInit {
                         popup
                             .append("path")
                             .attr("class", "title-rect")
-                            .attr('d', "M 0,0 L -10,-10 H -41 Q -50,-10 -50,-19 V -51 Q -50,-60-41,-60 H 41 Q 50,-60 50,-51 V -19 Q 50,-10 41,-10 H 10 z")
-                            .style("fill", this.color(7))        
-                            .style("stroke", this.color(0))        
+                            .attr('d', "M 0,0 L -5,-5 H -61.5 Q -66.5,-5 -66.5,-10 V -40 Q -66.5,-55 -61.5,-55 H 61.5 Q 66.5,-55 66.5,-40 V -10 Q 66.5,-5 61.5,-5 H 5 z")
+                            .style("fill", '#4ba5ee')        
+                            .style("stroke", '#014379')        
                             .style("opacity", 0.7)        
                             // .attr("x", -50)
                             // .attr("y", -15);
 
                         popup
                             .append("text")
-                            .text('Price : ' + d.data.price)
+                            .text('Profits: $ ' + d.data.price)
                             .attr("class", "title-text")
-                            .style("fill", this.color(0))        
+                            // .style("fill", this.color(0))        
                             .attr("text-anchor", "middle")
                             .attr("x", 5)
                             .attr("y", -35);
@@ -605,16 +605,16 @@ export class ChartTestComponent implements OnInit {
                 .attr('transform', 'translate(' + this.width / 2 + ',' + (this.height + 35)  + ')')
                 .append('text')
                 .attr('text-anchor',"middle")
-                .text('AAAAAAAAAAAAAAAAAAA')
+                .attr('font-weight',"bold")
+                .text('Time')
 
       this.context.append('g')
                   .attr('class', 'text')
                   .attr('transform', 'translate(-' + 1.5 * this.margin2.left + ',-' + (this.height2/2)  + ')')
                   .append('text')
                   .attr('text-anchor',"middle")
-                  .text('BBBBBBBBBBBBBB')                  
-                .text('BBBBBBBBBBBBBB')                  
-                  .text('BBBBBBBBBBBBBB')                  
+                  .attr('font-weight',"bold")
+                  .text('Profits  ( $ )')
                   .attr('transform', 'rotate(90' + ')')
 
       this.context.append('g')
