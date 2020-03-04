@@ -1,11 +1,5 @@
-import {Component, OnInit, ChangeDetectorRef, ViewEncapsulation, EventEmitter, Output} from '@angular/core';;
-import {HttpClient, HttpEventType, HttpResponse} from '@angular/common/http';
-import {Router, ActivatedRoute} from '@angular/router';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Subject, Observable, of, concat} from 'rxjs';
-import {Location} from '@angular/common';
-import {MatSnackBar} from '@angular/material';
-import {takeUntil, first} from 'rxjs/operators';
+import {Component, OnInit, ChangeDetectorRef, ViewEncapsulation} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
 
 import * as D3 from 'd3';
 import * as d3 from 'd3-selection';
@@ -113,14 +107,14 @@ export class ChartTestComponent implements OnInit {
             obj= [{
             values : data,
             child : data,
-            name: "chart"
-            }]
+            name: 'chart'
+            }];
             // console.log(obj);
             this.data = obj;
             this.currentData = obj;
             this.drwoPermanent(obj);
             this.drawChart(obj);
-        })
+        });
     }
 
     public drawNode(d){
