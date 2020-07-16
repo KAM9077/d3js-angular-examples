@@ -81,4 +81,5 @@ export class LineChartComponent implements OnInit {
             .attr('d', this.line);
     }
 
+    
 }
